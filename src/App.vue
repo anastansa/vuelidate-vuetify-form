@@ -17,8 +17,6 @@ export default {
 
   components: {
     LoginForm
-  },
-
-  data: () => ({}),
+  }
 }
 </script>
