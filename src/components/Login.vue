@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="5">
+    <v-col cols="11" lg="5">
       <v-form max-width="500">
         <v-text-field
             v-model="state.name"
@@ -13,7 +13,7 @@
             v-for="error of v$.name.$errors"
             :key="error.$uid"
         >
-          <span>{{ error.$message }}</span>
+          <span class="error">{{ error.$message }}</span>
         </p>
         <v-text-field
             v-model="state.email"
@@ -26,7 +26,7 @@
             v-for="error of v$.email.$errors"
             :key="error.$uid"
         >
-          <span>{{ error.$message }}</span>
+          <span class="error">{{ error.$message }}</span>
         </p>
         <v-text-field
             v-model="state.password.password"
@@ -40,7 +40,7 @@
             v-for="error of v$.password.password.$errors"
             :key="error.$uid"
         >
-          <span>{{ error.$message }}</span>
+          <span class="error">{{ error.$message }}</span>
         </p>
         <v-text-field
             v-model="state.password.confirm"
@@ -54,7 +54,7 @@
             v-for="error of v$.password.confirm.$errors"
             :key="error.$uid"
         >
-          <span>{{ error.$message }}</span>
+          <span class="error">{{ error.$message }}</span>
         </p>
         <v-btn
             color="blue"
@@ -99,6 +99,16 @@ export default {
 
     const onSubmit = () => {
       v$.value.$touch()
+
+      if(!v$.value.$errors.length) {
+        // submit form, then:
+
+        state.name = ''
+        state.email = ''
+        state.password.password = ''
+        state.password.confirm = ''
+        v$.value.$reset()
+      }
     }
 
     return {
@@ -111,5 +121,10 @@ export default {
 </script>
 
 <style scoped>
+
+.error {
+  color: red;
+  font-size: 14px;
+}
 
 </style>
