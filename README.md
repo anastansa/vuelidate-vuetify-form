@@ -1,6 +1,9 @@
-# vuelidate-vuetify-form
+## vuelidate-vuetify-form
 
-## Project setup
+This is a login form created with UI framework Vuetify and model validation library Vuelidate.
+
+
+### Getting started
 ```
 npm install
 ```
@@ -14,11 +17,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
