@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="11" lg="5">
-      <v-form max-width="500">
+      <v-form max-width="500" class="pa-8 rounded-lg elevation-2">
         <v-text-field
             v-model="state.name"
             clearable
@@ -68,55 +68,44 @@
   </v-row>
 </template>
 
-<script>
+<script setup>
 
 import { reactive, computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, sameAs, minLength } from '@vuelidate/validators'
 
-export default {
-  name: "LoginForm",
-  setup () {
-    const state = reactive({
-      name: '',
-      email: '',
-      password: {
-        password: '',
-        confirm: ''
-      }
-    })
+const state = reactive({
+  name: '',
+  email: '',
+  password: {
+    password: '',
+    confirm: ''
+  }
+})
 
-    const rules = {
-      name: { required },
-      email: { required, email },
-      password: {
-        password: { required, minLength: minLength(6), $autoDirty: true },
-        confirm: { required, sameAs: sameAs(computed(()=> state.password.password)), $autoDirty: true }
-      }
-    }
+const rules = {
+  name: { required },
+  email: { required, email },
+  password: {
+    password: { required, minLength: minLength(6), $autoDirty: true },
+    confirm: { required, sameAs: sameAs(computed(() => state.password.password)), $autoDirty: true }
+  }
+}
 
-    const v$ = useVuelidate(rules, state)
+const v$ = useVuelidate(rules, state)
 
-    const onSubmit = () => {
-      v$.value.$touch()
+const onSubmit = () => {
+  v$.value.$touch()
 
-      if(!v$.value.$errors.length) {
-        // submit form, then:
+  if (!v$.value.$errors.length) {
+    // submit form, then:
 
-        state.name = ''
-        state.email = ''
-        state.password.password = ''
-        state.password.confirm = ''
-        v$.value.$reset()
-      }
-    }
-
-    return {
-      state,
-      v$,
-      onSubmit
-    }
-  },
+    state.name = ''
+    state.email = ''
+    state.password.password = ''
+    state.password.confirm = ''
+    v$.value.$reset()
+  }
 }
 </script>
 

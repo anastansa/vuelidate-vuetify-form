@@ -10,11 +10,9 @@
 
 <script>
 
-
-import LoginForm from "@/components/Login";
+import LoginForm from "@/components/LoginForm";
 export default {
   name: 'App',
-
   components: {
     LoginForm
   }
